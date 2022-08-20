@@ -3,6 +3,8 @@ import { renderWithTheme } from 'utils/tests/helpers'
 
 import Button from '.'
 
+import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart'
+
 describe('<Button />', () => {
   it('should render the medium size by default', () => {
     renderWithTheme(<Button>Buy now</Button>)
@@ -39,5 +41,14 @@ describe('<Button />', () => {
     expect(screen.getByRole('button', { name: /Buy now/i })).toHaveStyle({
       width: '100%'
     })
+  })
+
+  it('should render an icon version', () => {
+    renderWithTheme(
+      <Button icon={<AddShoppingCart data-testid="icon" />}>Buy now</Button>
+    )
+
+    expect(screen.getByText(/buy now/i)).toBeInTheDocument()
+    expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 })
